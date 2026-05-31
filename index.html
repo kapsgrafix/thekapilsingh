@@ -179,7 +179,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .section-title{font-family:var(--ff-d);font-size:clamp(2.4rem,4vw,3.8rem);font-weight:300;line-height:1;letter-spacing:-.02em;color:var(--white);}
 .section-title em{font-style:italic;color:var(--gold);}
 .tag{display:inline-block;font-family:var(--ff-m);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,134,74,.28);padding:2px 8px;border-radius:2px;}
-.pill{display:inline-block;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--border2);padding:3px 10px;}
+.pill{display:inline-block;font-family:var(--ff-m);font-size:.70rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--border2);padding:3px 10px;}
 .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-m);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 1.6rem;border:1px solid;cursor:none;transition:all .22s;}
 .btn-fill{background:var(--gold);color:var(--bg);border-color:var(--gold);}
 .btn-fill:hover{background:var(--gold2);border-color:var(--gold2);}
@@ -188,7 +188,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 svg.arr{width:12px;height:12px;transition:transform .2s;}
 a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 
-/* reveal */
+/* ─── DESKTOP BODY TEXT SCALE UP ────────────────── */
+@media(min-width:1025px){
+  .hero-sub{font-size:1.1rem;}
+  .about-body{font-size:1rem;}
+  .wco{font-size:1rem;}
+  .wrole{font-size:1.2rem;}
+  .wbullets li{font-size:.92rem;line-height:1.8;}
+  .wdesc{font-size:.92rem;}
+  .af-excerpt{font-size:1rem;}
+  .af-quote{font-size:1.15rem;}
+  .ac-excerpt{font-size:.85rem;}
+  .contact-sub{font-size:1rem;}
+  .cl-val{font-size:.95rem;}
+}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
 .rv.in{opacity:1;transform:none;}
 .rv2{opacity:0;transition:opacity .75s ease .15s,transform .75s ease .15s;transform:translateY(22px);}
@@ -253,7 +266,7 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 .witem:hover{background:rgba(255,255,255,.012);}
 .wl{padding:2rem 1.5rem 2rem 0;border-right:1px solid var(--border);}
 .wco{font-family:var(--ff-b);font-size:.88rem;font-weight:500;color:var(--white);display:block;margin-bottom:.2rem;}
-.wper{font-family:var(--ff-m);font-size:.56rem;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.7rem;}
+.wper{font-family:var(--ff-m);font-size:.80rem;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.7rem;}
 .wr{padding:2rem 0 2rem 2.25rem;}
 .wrole{font-family:var(--ff-d);font-size:1.1rem;font-weight:300;color:var(--white);display:block;margin-bottom:.5rem;}
 .wdesc{font-size:.8rem;line-height:1.85;color:var(--muted2);margin-bottom:.75rem;}
@@ -261,7 +274,7 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 .wbullets li{font-size:.8rem;line-height:1.75;color:var(--muted2);padding-left:1.1rem;position:relative;}
 .wbullets li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.7rem;top:.05em;}
 .wtags{display:flex;flex-wrap:wrap;gap:.35rem;}
-.wtag{font-family:var(--ff-m);font-size:.53rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:2px 7px;}
+.wtag{font-family:var(--ff-m);font-size:.70rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:2px 7px;}
 
 /* ─── ARTICLES SECTION ───────────────────────────── */
 #articles{padding:5.5rem 3.5rem;border-bottom:1px solid var(--border);}
@@ -383,7 +396,7 @@ footer{border-top:1px solid var(--border);padding:2rem 3.5rem;display:flex;justi
     </div>
     <div class="hero-badge">
       <div class="hero-badge-dot"></div>
-      <span class="hero-badge-txt">Born in Dehradun · Shaped in Mumbai · Thriving in Delhi</span>
+      <span class="hero-badge-txt">Born in Dehradun · Shaped in Mumbai · Now building from Delhi</span>
     </div>
     <div class="hero-num">18</div>
   </div>

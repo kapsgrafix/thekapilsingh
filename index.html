@@ -163,13 +163,22 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 .cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
 .cs-card{background:var(--white);border-radius:6px;overflow:hidden;cursor:none;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;box-shadow:0 1px 3px rgba(0,0,0,.04);}
 .cs-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1);}
-.cs-img{aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.cs-img{aspect-ratio:16/10;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .cs-img-1{background:linear-gradient(135deg,#2d1b4e 0%,#7b3f8f 100%);}
 .cs-img-2{background:linear-gradient(135deg,#8a3f2a 0%,#c8864a 100%);}
 .cs-img-3{background:linear-gradient(135deg,#1a3a3a 0%,#2d6b5f 100%);}
-.cs-img-photo{background:var(--s2);}
-.cs-img-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.cs-img-photo{background:#3a1a5e;}
+.cs-img-photo img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s cubic-bezier(.16,1,.3,1);}
 .cs-card:hover .cs-img-photo img{transform:scale(1.05);}
+/* Locked cards */
+.cs-locked{cursor:not-allowed;}
+.cs-locked:hover{transform:none;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.cs-lock-overlay{position:absolute;inset:0;background:rgba(15,12,20,.62);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;z-index:2;}
+.cs-lock-icon{width:44px;height:44px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;}
+.cs-lock-icon svg{width:22px;height:22px;}
+.cs-lock-txt{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.cs-link-locked{color:var(--muted)!important;}
+.cs-locked .cs-title,.cs-locked .cs-sub{opacity:.75;}
 .cs-img-glyph{font-size:5rem;color:rgba(255,255,255,.14);transition:transform .5s cubic-bezier(.16,1,.3,1);}
 .cs-card:hover .cs-img-glyph{transform:scale(1.15) rotate(8deg);}
 .cs-img-tag{position:absolute;top:1rem;left:1rem;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);padding:4px 9px;border-radius:3px;}
@@ -356,10 +365,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
   <h2 class="work-heading rv">Case <span>Studies</span></h2>
   <div class="cs-grid rv stagger">
 
-    <a href="case-studies/tongits.html" class="cs-card">
+    <a href="tongits.html" class="cs-card">
       <div class="cs-img cs-img-photo">
         <span class="cs-img-tag">B2C · Gaming · PH</span>
-        <img src="case-studies/tongits-hero.png" alt="TongitsHub app redesign thumbnail">
+        <img src="tongits-hero.png" alt="TongitsHub app redesign thumbnail">
       </div>
       <div class="cs-body">
         <span class="cs-co">TongitsHub</span>
@@ -369,31 +378,43 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
       </div>
     </a>
 
-    <a href="#contact" class="cs-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="cs-card cs-locked">
       <div class="cs-img cs-img-2">
         <span class="cs-img-tag">0→1 · Filipino Market</span>
         <div class="cs-img-glyph">◆</div>
+        <div class="cs-lock-overlay">
+          <div class="cs-lock-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <span class="cs-lock-txt">Coming Soon</span>
+        </div>
       </div>
       <div class="cs-body">
         <span class="cs-co">Tongits · Junglee Games</span>
         <h3 class="cs-title">Launching Tongits from Zero to 1 Hour Screen Time</h3>
         <p class="cs-sub">Defining the UX philosophy for a 0→1 gaming product built for the Philippines — reaching 1 hour average screen time within a quarter of launch.</p>
-        <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="cs-link cs-link-locked">Case Study Locked</span>
       </div>
-    </a>
+    </div>
 
-    <a href="#contact" class="cs-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
+    <div class="cs-card cs-locked">
       <div class="cs-img cs-img-3">
         <span class="cs-img-tag">B2B · SaaS</span>
         <div class="cs-img-glyph">◇</div>
+        <div class="cs-lock-overlay">
+          <div class="cs-lock-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <span class="cs-lock-txt">Coming Soon</span>
+        </div>
       </div>
       <div class="cs-body">
         <span class="cs-co">Richpanel</span>
         <h3 class="cs-title">An AI Support Platform That Cut Tickets by 80%</h3>
         <p class="cs-sub">Building the UX vision and product from the ground up — an AI-assisted customer support platform that reduced manually resolved tickets by 80%+.</p>
-        <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="cs-link cs-link-locked">Case Study Locked</span>
       </div>
-    </a>
+    </div>
 
   </div>
 </section>

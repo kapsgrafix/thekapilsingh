@@ -177,11 +177,12 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 .cs-lock-icon{width:44px;height:44px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;}
 .cs-lock-icon svg{width:22px;height:22px;}
 .cs-lock-txt{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85);}
-.cs-link-locked{color:var(--muted)!important;}
+.cs-link-locked{color:var(--muted2)!important;cursor:none;transition:color .2s,gap .2s;}
+.cs-link-locked:hover{color:var(--accent)!important;gap:.75rem;}
 .cs-locked .cs-title,.cs-locked .cs-sub{opacity:.75;}
 .cs-img-glyph{font-size:5rem;color:rgba(255,255,255,.14);transition:transform .5s cubic-bezier(.16,1,.3,1);}
 .cs-card:hover .cs-img-glyph{transform:scale(1.15) rotate(8deg);}
-.cs-img-tag{position:absolute;top:1rem;left:1rem;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);padding:4px 9px;border-radius:3px;}
+.cs-img-tag{position:absolute;top:0;right:0;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);padding:6px 11px;border-radius:0 0 0 6px;z-index:3;}
 .cs-body{padding:1.75rem;display:flex;flex-direction:column;gap:.6rem;flex:1;}
 .cs-co{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
 .cs-title{font-family:var(--ff-d);font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ink);letter-spacing:-.01em;}
@@ -373,27 +374,27 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
       <div class="cs-body">
         <span class="cs-co">TongitsHub</span>
         <h3 class="cs-title">Redesigning TongitsHub's App Experience</h3>
-        <p class="cs-sub">How a landscape-first redesign and richer visuals closed the experience-fit gap — driving average session time to 48 minutes post-launch.</p>
+        <p class="cs-sub">How a landscape-first redesign and richer visuals closed the experience-fit gap — improving retention and average session time post-launch.</p>
         <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </a>
 
     <div class="cs-card cs-locked">
       <div class="cs-img cs-img-2">
-        <span class="cs-img-tag">0→1 · Filipino Market</span>
+        <span class="cs-img-tag">B2C · Gaming</span>
         <div class="cs-img-glyph">◆</div>
         <div class="cs-lock-overlay">
           <div class="cs-lock-icon">
             <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
-          <span class="cs-lock-txt">Coming Soon</span>
+          <span class="cs-lock-txt">Locked</span>
         </div>
       </div>
       <div class="cs-body">
-        <span class="cs-co">Tongits · Junglee Games</span>
-        <h3 class="cs-title">Launching Tongits from Zero to 1 Hour Screen Time</h3>
-        <p class="cs-sub">Defining the UX philosophy for a 0→1 gaming product built for the Philippines — reaching 1 hour average screen time within a quarter of launch.</p>
-        <span class="cs-link cs-link-locked">Case Study Locked</span>
+        <span class="cs-co">Junglee Rummy</span>
+        <h3 class="cs-title">Redesigning KYC to Near-100% Completion</h3>
+        <p class="cs-sub">Rethinking the KYC automation flow from the ground up — a redesign that pushed verification success rates to almost 100%.</p>
+        <a href="#contact" class="cs-link cs-link-locked" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Let's Discuss 1:1 →</a>
       </div>
     </div>
 
@@ -405,14 +406,14 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
           <div class="cs-lock-icon">
             <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
-          <span class="cs-lock-txt">Coming Soon</span>
+          <span class="cs-lock-txt">Locked</span>
         </div>
       </div>
       <div class="cs-body">
         <span class="cs-co">Richpanel</span>
         <h3 class="cs-title">An AI Support Platform That Cut Tickets by 80%</h3>
         <p class="cs-sub">Building the UX vision and product from the ground up — an AI-assisted customer support platform that reduced manually resolved tickets by 80%+.</p>
-        <span class="cs-link cs-link-locked">Case Study Locked</span>
+        <a href="#contact" class="cs-link cs-link-locked" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Let's Discuss 1:1 →</a>
       </div>
     </div>
 
@@ -444,12 +445,12 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
       <p class="ac-excerpt">Why do some apps feel alive while others feel like furniture? After years studying the world's most engaging mobile games, a framework built on one idea — the best apps behave like living beings. Motion × Touch × Emotion × Sound = Life.</p>
       <div class="ac-foot"><span class="ac-date">Jun 2026 · 5 min</span><span class="ac-read">Read on Medium →</span></div>
     </a>
-    <a href="https://medium.com/@kapsgrafix/handmade-ui-and-ux-will-become-the-new-luxury-d8fdce4b9d23" target="_blank" rel="noopener" class="art-card">
-      <span class="tag">UX · AI · Craft</span>
+    <a href="https://medium.com/design-bootcamp/designers-you-are-using-ai-to-stay-small-6a2c6a18521a" target="_blank" rel="noopener" class="art-card">
+      <span class="tag">UX · AI · Design Thinking</span>
       <div class="ac-n">02</div>
-      <div class="ac-title">Handmade UI and UX <em>Will Become The New Luxury</em></div>
-      <p class="ac-excerpt">AI is about to do to design what the assembly line did to manufacturing — and that is exactly what makes it the floor, not the ceiling. Everyone will have access to AI design. Very few will have the skill to do it by hand.</p>
-      <div class="ac-foot"><span class="ac-date">Apr 2026 · 6 min</span><span class="ac-read">Read on Medium →</span></div>
+      <div class="ac-title">Designers, You Are Using AI <em>to Stay Small</em></div>
+      <p class="ac-excerpt">Two ways designers are playing small with AI — and what elevation actually looks like. When you ask AI for direction, you've put the junior in charge and made yourself the assistant. Think first, then use AI to execute.</p>
+      <div class="ac-foot"><span class="ac-date">Jun 2026 · 5 min</span><span class="ac-read">Read on Medium →</span></div>
     </a>
   </div>
   <div class="art-medium-cta">

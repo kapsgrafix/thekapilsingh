@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redesigning TongitsHub — Case Study | Kapil Singh</title>
+<meta name="description" content="A product design case study by Kapil Singh: how the TongitsHub app experience was revamped to drive retention and session time, reaching a 48-minute average session.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f2;--white:#fff;--s1:#f0ede8;--s2:#e8e4dd;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
+  --ink:#111110;--muted:#9a9690;--muted2:#6b6760;
+  --accent:#c8864a;--accent2:#a86535;--accent-bg:rgba(200,134,74,0.08);
+  --ff-d:'Poppins',sans-serif;--ff-b:'Poppins',sans-serif;--ff-m:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--ff-b);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .08s;}
+#cr{width:30px;height:30px;border:1.5px solid rgba(200,134,74,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+body:has(a:hover) #cr{width:46px;height:46px;border-color:var(--accent);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:rgba(247,245,242,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.nav-back:hover{color:var(--accent);}
+
+.cs-page{padding-top:58px;}
+
+/* Hero */
+.cs-hero{padding:4rem 3.5rem 2.5rem;max-width:1100px;margin:0 auto;}
+.cs-breadcrumb{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;display:flex;gap:.6rem;align-items:center;}
+.cs-breadcrumb a{color:var(--accent);}
+.cs-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.tag{display:inline-block;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);background:rgba(200,134,74,.1);padding:4px 10px;border-radius:3px;}
+.cs-h1{font-family:var(--ff-d);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:600;line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin-bottom:1.25rem;}
+.cs-h1 span{color:var(--accent);}
+.cs-intro{font-size:1.15rem;line-height:1.6;color:var(--muted2);max-width:720px;font-weight:400;}
+
+/* Hero image */
+.cs-hero-img{max-width:1100px;margin:2.5rem auto 0;padding:0 3.5rem;}
+.cs-hero-img img{width:100%;border-radius:8px;border:1px solid var(--border);}
+
+/* Meta bar */
+.cs-meta{max-width:1100px;margin:3rem auto;padding:0 3.5rem;}
+.cs-meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.cs-meta-cell{background:var(--white);padding:1.5rem;}
+.cs-meta-k{font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;}
+.cs-meta-v{font-size:.9rem;color:var(--ink);font-weight:500;line-height:1.4;}
+
+/* Body */
+.cs-body{max-width:760px;margin:0 auto;padding:2rem 3.5rem 5rem;}
+.cs-body h2{font-family:var(--ff-d);font-size:1.7rem;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin:3rem 0 1rem;line-height:1.2;}
+.cs-body h3{font-family:var(--ff-d);font-size:1.15rem;font-weight:600;color:var(--ink);margin:2rem 0 .75rem;}
+.cs-body p{font-size:1rem;line-height:1.8;color:var(--muted2);margin-bottom:1.25rem;}
+.cs-body p strong{color:var(--ink);font-weight:600;}
+.cs-body ul{list-style:none;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.85rem;}
+.cs-body ul li{font-size:1rem;line-height:1.7;color:var(--muted2);padding-left:1.3rem;position:relative;}
+.cs-body ul li::before{content:'–';position:absolute;left:0;color:var(--accent);font-weight:600;}
+.cs-body ul li strong{color:var(--ink);font-weight:600;}
+
+.callout{background:var(--white);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:1.5rem 1.75rem;margin:2rem 0;}
+.callout-label{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:block;}
+.callout p{font-size:.92rem;margin-bottom:.5rem;color:var(--muted2);}
+.callout p:last-child{margin-bottom:0;}
+.callout p strong{color:var(--ink);}
+
+.quote-block{font-family:var(--ff-d);font-size:1.25rem;font-weight:500;font-style:italic;line-height:1.5;color:var(--ink);border-left:3px solid var(--accent);padding-left:1.5rem;margin:2.5rem 0;}
+
+.cs-figure{margin:2.5rem 0;}
+.cs-figure img{width:100%;border-radius:8px;border:1px solid var(--border);}
+.cs-figure figcaption{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;color:var(--muted);margin-top:.85rem;text-align:center;}
+
+/* full width figure breaks out of body column */
+.cs-figure-wide{max-width:1100px;margin:3rem auto;padding:0 3.5rem;}
+.cs-figure-wide img{width:100%;border-radius:8px;border:1px solid var(--border);}
+.cs-figure-wide figcaption{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;color:var(--muted);margin-top:.85rem;text-align:center;}
+
+.insight-list{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0;}
+.insight{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.5rem;}
+.insight-q{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;font-style:italic;}
+.insight-a{font-size:.92rem;line-height:1.6;color:var(--muted2);}
+
+/* Outcome highlight */
+.outcome{background:var(--ink);border-radius:10px;padding:3rem;margin:3rem 0;text-align:center;}
+.outcome-n{font-family:var(--ff-d);font-size:clamp(3rem,7vw,5rem);font-weight:600;color:var(--accent);line-height:1;letter-spacing:-.02em;}
+.outcome-l{font-size:1rem;line-height:1.6;color:rgba(247,245,242,.7);max-width:440px;margin:1.25rem auto 0;}
+
+.principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;}
+.principle{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.5rem;}
+.principle-t{font-family:var(--ff-d);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;}
+.principle-d{font-size:.88rem;line-height:1.6;color:var(--muted2);}
+
+/* Next CTA */
+.cs-next{background:var(--white);border-top:1px solid var(--border);padding:4rem 3.5rem;text-align:center;}
+.cs-next h3{font-family:var(--ff-d);font-size:1.6rem;font-weight:600;color:var(--ink);margin-bottom:1.5rem;letter-spacing:-.01em;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-m);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 1.8rem;border:1.5px solid;cursor:none;transition:all .22s;border-radius:2px;}
+.btn-fill{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.btn-fill:hover{background:var(--accent);border-color:var(--accent);}
+svg.arr{width:12px;height:12px;transition:transform .2s;}
+a:hover svg.arr{transform:translateX(-3px);}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:1.75rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:var(--ff-d);font-size:.95rem;font-weight:600;color:rgba(247,245,242,.3);}
+.foot-logo span{color:var(--accent);}
+.foot-copy{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,245,242,.2);}
+
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;opacity:1;transform:none;}}
+
+@media(max-width:768px){
+  body{cursor:auto;}
+  #cd,#cr{display:none;}
+  nav{padding:1rem 1.25rem;}
+  .cs-hero,.cs-body,.cs-hero-img,.cs-meta,.cs-figure-wide{padding-left:1.25rem;padding-right:1.25rem;}
+  .cs-meta-grid{grid-template-columns:1fr 1fr;}
+  .principle-grid{grid-template-columns:1fr;}
+  .outcome{padding:2rem 1.5rem;}
+  .cs-next{padding:3rem 1.25rem;}
+  footer{padding:1.5rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div><div id="cr"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Kapil Singh<span>.</span></a>
+  <a href="../index.html#work" class="nav-back"><svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to Work</a>
+</nav>
+
+<div class="cs-page">
+
+  <!-- HERO -->
+  <div class="cs-hero">
+    <div class="cs-breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#work">Work</a> / <span>TongitsHub</span></div>
+    <div class="cs-tags">
+      <span class="tag">Product Design</span>
+      <span class="tag">B2C · Gaming</span>
+      <span class="tag">Philippines</span>
+      <span class="tag">0→1 to Scale</span>
+    </div>
+    <h1 class="cs-h1">Redesigning <span>TongitsHub's</span> App Experience</h1>
+    <p class="cs-intro">How we revamped the core app interface to keep players engaged — successfully driving up retention and average session times.</p>
+  </div>
+
+  <div class="cs-hero-img rv">
+    <img src="tongits-hero.png" alt="TongitsHub app redesign — hero collage of the new landscape home screen">
+  </div>
+
+  <!-- META -->
+  <div class="cs-meta rv">
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><span class="cs-meta-k">My Role</span><span class="cs-meta-v">Design Head, TongitsHub</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Team</span><span class="cs-meta-v">1 Junior Designer · 2 Developers · 1 Animator</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Objective</span><span class="cs-meta-v">Improve retention & session duration</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Launched</span><span class="cs-meta-v">MVP Nov 2025 · Redesign 2026</span></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <article class="cs-body">
+
+    <p>TongitsHub launched in November 2025 as an MVP to validate demand for a Tongits-focused, free-to-play gaming platform in the Philippines.</p>
+
+    <h2>The Problem</h2>
+    <p>The demand was clear: we acquired a healthy user base and proved the market hypothesis. But the next challenge was experience. <strong>Users were coming in, but not staying long enough.</strong> Retention and average session time were below the level needed to justify moving from MVP to a full-scale product investment.</p>
+
+    <h2>My Read on the Problem</h2>
+    <p>Before starting formal research, my working hypothesis as Design Head was that this was not a content or feature problem, but an <strong>experience-fit problem</strong>.</p>
+    <p>Users were not dropping off because Tongits was weak as a game; the format was already proven and loved. The issue was that the app experience — especially on opening — did not match what users had come to expect from years of using competitor Tongits apps.</p>
+    <p>So instead of jumping into quick fixes like faster loading, more bonuses, or small UI tweaks, I decided to commission proper research to validate this theory before investing design and engineering effort into a solution.</p>
+
+    <div class="cs-figure">
+      <img src="tongits-orientation.png" alt="Portrait versus landscape orientation comparison for the app experience">
+    </div>
+
+    <blockquote class="quote-block">To structure the investigation, I led the project using the Double Diamond framework — Discover, Define, Develop, Deliver. Widen first to understand the real problem, then narrow to a single, well-justified solution.</blockquote>
+  </article>
+
+  <div class="cs-figure-wide rv">
+    <img src="tongits-doublediamond.png" alt="Double Diamond framework applied to the TongitsHub redesign">
+    <figcaption>The Double Diamond framework — Discover, Define, Develop, Deliver</figcaption>
+  </div>
+
+  <article class="cs-body">
+    <h2>How We Conducted the Investigation</h2>
+
+    <h3>1. Discover</h3>
+    <p>As a design team, we built the research plan from the ground up and took a highly hands-on approach to the user interview calls. This wasn't a brief we simply handed off; our core team was directly in the room — or on the line — engaging with our users.</p>
+
+    <p><strong>Track 1 — Qualitative User Research: What the Players Told Us</strong></p>
+    <p>We conducted a qualitative study of 20 players across Metro Manila, Cavite, Bulacan, Cebu, and nearby provinces using direct user interviews and behavioral tracking. Instead of relying on dry, synthesized data, we jumped on the calls ourselves to hear the players' raw, unfiltered thoughts.</p>
+
+    <div class="insight-list">
+      <div class="insight">
+        <div class="insight-q">"I already know how to play Tongits on my phone."</div>
+        <div class="insight-a">Users already knew Tongits from competitor apps, so familiarity mattered more than reinvention.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-q">"This is how I unwind after work."</div>
+        <div class="insight-a">Most play happened after work, for 30–45 minutes, so the experience needed to feel engaging and premium.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-q">"If it looks shady, I'm out."</div>
+        <div class="insight-a">Users judged safety within seconds, making polish, clarity and visual quality critical.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-q">"Make it feel like a game with friends, not a casino."</div>
+        <div class="insight-a">The tone needed to feel social, fun and community-led — not transactional or gambling-heavy.</div>
+      </div>
+    </div>
+
+    <p><strong>Track 2 — Competitor Benchmarking</strong></p>
+    <p>To understand the mental models our players already possessed, we conducted a targeted visual and UX audit of the most popular Tongits apps in the Philippine market — Tongits Go, ZingPlay Tongits and Tongits Club.</p>
+  </article>
+
+  <div class="cs-figure-wide rv">
+    <img src="tongits-competitors.png" alt="Competitor benchmark of leading Tongits apps in the Philippine market">
+    <figcaption>Competitor benchmark — every major Tongits app was landscape-first</figcaption>
+  </div>
+
+  <article class="cs-body">
+    <p>The finding was unambiguous: <strong>every major competitor was landscape-first. Not a majority — all of them.</strong> This told me the issue wasn't a matter of taste; it was a market standard that TongitsHub was failing to meet.</p>
+
+    <h3>2. Define → Decision — The Call We Made</h3>
+    <p>Our research surfaced a laundry list of possible issues — onboarding friction, trust signal gaps, layout problems, and aesthetic disconnects. But our job as a team wasn't just to collect findings; it was to prioritize the highest-leverage fixes.</p>
+    <p>We made the strategic call to tackle two foundational pillars simultaneously: <strong>fixing the homescreen orientation</strong> and <strong>drastically upgrading the visual richness</strong>. We needed to be at par with the competition and deliver exactly the immersive, vibrant experience our users expected.</p>
+
+    <p><strong>Why we prioritized this dual-approach over smaller, isolated UI tweaks:</strong></p>
+    <ul>
+      <li><strong>Matching the mental model:</strong> It was the most universal pattern in the data. Every dominant competitor and user reference point highlighted the exact same gap in our layout and aesthetic. We had to meet their baseline expectations.</li>
+      <li><strong>Fixing the root cause, not symptoms:</strong> Trust signals, layout hierarchy, and character presence weren't separate problems. They were downstream consequences of getting the orientation and the visual richness right.</li>
+      <li><strong>Curing the "vibe check":</strong> Fixing the layout and injecting that vibrant, culturally resonant aesthetic directly addressed the underlying "this feels off" cognitive dissonance. We recognized that this gut reaction was the true, silent retention killer.</li>
+    </ul>
+
+    <h3>3. Develop — Leading the Design & Build</h3>
+    <p>Once the direction was approved, I first translated the research findings into clear design principles before moving into execution.</p>
+
+    <p><strong>The redesign was guided by two core principles:</strong></p>
+    <div class="principle-grid">
+      <div class="principle">
+        <div class="principle-t">Design for accessibility</div>
+        <div class="principle-d">Keep the experience familiar, easy to scan and simple to start playing.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-t">Design for delight</div>
+        <div class="principle-d">Make the home screen feel rich, lively and rewarding from the first open.</div>
+      </div>
+    </div>
+
+    <p>We began with a <strong>card sorting exercise</strong> to identify what should appear on the home screen and how it should be prioritised. This helped us define the right hierarchy for game entry points, rewards, wallet actions, navigation and promotions.</p>
+    <p>We then moved into <strong>wireframes</strong> to establish the landscape-first structure, followed by <strong>high-fidelity designs</strong> where we brought in richer visuals, stronger character presence, clear action zones and an engaging lobby experience.</p>
+
+    <p><strong>My role through execution:</strong></p>
+    <ul>
+      <li>Directed and reviewed my junior designer's wireframes and high-fidelity explorations against these principles.</li>
+      <li>Collaborated with the dev team to validate technical feasibility of the landscape rebuild and sequence the engineering work.</li>
+      <li>Collaborated with the motion graphics team to bring the character and ambient scene elements to life in a way that matched the energy benchmarked from competitors.</li>
+    </ul>
+
+    <h3>4. Deliver — Shipping It</h3>
+    <p>Once the final designs were approved, we prepared the work for development handoff and made sure the engineering team had enough clarity to execute without ambiguity.</p>
+    <p>The Figma files were shared with the engineering lead, including final screens, user flows, interaction states, component behaviour, and key visual references. We also documented the core experience principles behind the redesign, so the build stayed aligned to the product intent and did not become just a screen-by-screen implementation exercise.</p>
+    <p>Since the redesign was a major shift from the MVP experience, we planned the release as a controlled experiment. The updated home screen was first rolled out to <strong>10% of users</strong>, allowing us to validate the new direction, observe early behaviour, and reduce risk before considering a wider rollout.</p>
+
+    <h2>The Outcome</h2>
+    <div class="outcome">
+      <div class="outcome-n">48 min</div>
+      <div class="outcome-l">Average session time post-launch — a clear signal that the landscape redesign successfully closed the experience-fit gap identified during research.</div>
+    </div>
+
+    <h2>What This Taught Me as a Design Leader</h2>
+    <ul>
+      <li><strong>Research is a leadership tool, not just a design input.</strong> Building the research plan myself and sitting in on user calls gave me first-hand conviction when pitching the redesign — secondhand findings rarely carry the same weight in a stakeholder room.</li>
+      <li><strong>Prioritization is the real job.</strong> The hardest part of this project wasn't designing the new homescreen — it was deciding, among several plausible fixes, which one was actually the root cause worth betting the team's time on.</li>
+      <li><strong>Category conventions are evidence, not aesthetics.</strong> When every competitor converges on the same pattern, that's market data — treating it as a design opinion would have weakened the case I made to stakeholders.</li>
+      <li><strong>Cross-functional fluency multiplies design impact.</strong> This redesign only worked because of close collaboration with engineering (feasibility) and motion graphics (execution quality) — leading design here meant leading the connective tissue between teams, not just the screens.</li>
+    </ul>
+
+  </article>
+
+  <!-- NEXT CTA -->
+  <div class="cs-next">
+    <h3>Interested in working together?</h3>
+    <a href="../index.html#contact" class="btn btn-fill">Get in Touch <svg class="arr" viewBox="0 0 12 12" fill="none" style="transform:none;"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-logo">Kapil Singh<span>.</span></div>
+  <div class="foot-copy">© 2026 · New Delhi, India</div>
+</footer>
+
+<script>
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.transform=`translate(${mx-3.5}px,${my-3.5}px)`;});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.transform=`translate(${rx-15}px,${ry-15}px)`;requestAnimationFrame(tick);})();
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

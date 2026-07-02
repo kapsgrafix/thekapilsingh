@@ -156,22 +156,37 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(2px,-2px);}
 .about-body{font-size:1rem;line-height:1.85;color:var(--muted2);}
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem;}
 
-/* ── WORK ────────────────────────────────────────── */
+/* ── WORK / CASE STUDIES ─────────────────────────── */
 #work{padding:6rem 3.5rem;border-bottom:1px solid var(--border);}
-.work-list{display:flex;flex-direction:column;margin-top:3rem;}
-.witem{display:grid;grid-template-columns:240px 1fr;border-top:1px solid var(--border);transition:background .2s;}
-.witem:last-child{border-bottom:1px solid var(--border);}
-.witem:hover{background:var(--white);}
-.wl{padding:2.25rem 2rem 2.25rem 0;border-right:1px solid var(--border);}
-.wco{font-family:var(--ff-b);font-size:1rem;font-weight:600;color:var(--ink);display:block;margin-bottom:.25rem;}
-.wper{font-family:var(--ff-m);font-size:.80rem;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:.75rem;}
-.wtag{font-family:var(--ff-m);font-size:.70rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);padding:2px 7px;border-radius:2px;}
-.wr{padding:2.25rem 0 2.25rem 2.5rem;}
-.wrole{font-family:var(--ff-d);font-size:1.2rem;font-weight:500;color:var(--ink);display:block;margin-bottom:.85rem;letter-spacing:-.01em;}
-.wbullets{list-style:none;margin-bottom:1rem;display:flex;flex-direction:column;gap:.5rem;}
-.wbullets li{font-size:.9rem;line-height:1.75;color:var(--muted2);padding-left:1.2rem;position:relative;}
-.wbullets li::before{content:'–';position:absolute;left:0;color:var(--accent);font-weight:600;}
-.wtags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.work-heading{font-family:var(--ff-d);font-size:clamp(2rem,4vw,3.2rem);font-weight:600;letter-spacing:-.025em;color:var(--ink);line-height:1;margin-bottom:.5rem;}
+.work-heading span{color:var(--accent);}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.cs-card{background:var(--white);border-radius:6px;overflow:hidden;cursor:none;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.cs-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1);}
+.cs-img{aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.cs-img-1{background:linear-gradient(135deg,#2d1b4e 0%,#7b3f8f 100%);}
+.cs-img-2{background:linear-gradient(135deg,#8a3f2a 0%,#c8864a 100%);}
+.cs-img-3{background:linear-gradient(135deg,#1a3a3a 0%,#2d6b5f 100%);}
+.cs-img-photo{background:var(--s2);}
+.cs-img-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.cs-card:hover .cs-img-photo img{transform:scale(1.05);}
+.cs-img-glyph{font-size:5rem;color:rgba(255,255,255,.14);transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.cs-card:hover .cs-img-glyph{transform:scale(1.15) rotate(8deg);}
+.cs-img-tag{position:absolute;top:1rem;left:1rem;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);padding:4px 9px;border-radius:3px;}
+.cs-body{padding:1.75rem;display:flex;flex-direction:column;gap:.6rem;flex:1;}
+.cs-co{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.cs-title{font-family:var(--ff-d);font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ink);letter-spacing:-.01em;}
+.cs-sub{font-size:.85rem;line-height:1.65;color:var(--muted2);flex:1;}
+.cs-link{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-top:.5rem;transition:gap .2s,color .2s;}
+.cs-card:hover .cs-link{gap:.75rem;color:var(--accent);}
+
+/* ── RESUME ──────────────────────────────────────── */
+#resume{padding:5rem 3.5rem;border-bottom:1px solid var(--border);background:var(--white);}
+.resume-inner{display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap;}
+.resume-h{font-family:var(--ff-d);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.05;margin-bottom:.85rem;}
+.resume-h span{color:var(--accent);}
+.resume-sub{font-size:1rem;line-height:1.7;color:var(--muted2);max-width:520px;}
+.resume-btn{flex-shrink:0;}
 
 /* ── ARTICLES ────────────────────────────────────── */
 #articles{padding:6rem 3.5rem;border-bottom:1px solid var(--border);}
@@ -238,9 +253,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
 @media(min-width:1025px){
   .hero-sub{font-size:1.15rem;}
   .about-body{font-size:1.05rem;}
-  .wbullets li{font-size:.95rem;}
-  .wrole{font-size:1.3rem;}
-  .wco{font-size:1.05rem;}
+  .cs-sub{font-size:.88rem;}
   .af-excerpt{font-size:1.05rem;}
   .af-quote{font-size:1.15rem;}
   .ac-excerpt{font-size:.88rem;}
@@ -255,9 +268,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
   #about{grid-template-columns:1fr;gap:2.5rem;padding:4rem 1.5rem;}
   .about-label{position:static;top:auto;}
   #work,#articles{padding:4rem 1.5rem;}
-  .witem{grid-template-columns:1fr;}
-  .wl{border-right:none;border-bottom:1px solid var(--border);padding:1.5rem 0 1rem;}
-  .wr{padding:1.25rem 0 1.75rem;}
+  #resume{padding:3.5rem 1.5rem;}
+  .cs-grid{grid-template-columns:1fr;gap:1.5rem;}
+  .resume-inner{flex-direction:column;align-items:flex-start;gap:2rem;}
   .art-feat{grid-template-columns:1fr;}
   .af-left{border-right:none;border-bottom:1.5px solid var(--border2);padding:2.25rem;}
   .af-right{padding:2.25rem;}
@@ -268,6 +281,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
   .hero-stat{padding:1.25rem 1.75rem;}
   .hero-stat:first-child{padding-left:1.5rem;}
   footer{padding:1.5rem 1.5rem;}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .cs-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -283,6 +299,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
+    <li><a href="#resume">Résumé</a></li>
     <li><a href="#articles">Articles</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -333,87 +350,65 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
   </div>
 </section>
 
-<!-- ═══ WORK ═══ -->
+<!-- ═══ WORK / CASE STUDIES ═══ -->
 <section id="work">
-  <div class="eyebrow rv"><span>Work History</span></div>
-  <div class="work-list rv stagger">
+  <div class="eyebrow rv"><span>Selected Work</span></div>
+  <h2 class="work-heading rv">Case <span>Studies</span></h2>
+  <div class="cs-grid rv stagger">
 
-    <div class="witem">
-      <div class="wl"><span class="wco">Junglee Games</span><span class="wper">Dec 2021 – Present</span><span class="wtag">B2C · Gaming</span></div>
-      <div class="wr">
-        <span class="wrole">Director of Design <span style="color:var(--muted);font-size:.72rem;font-family:var(--ff-m);letter-spacing:.05em;font-style:normal;"> · Apr 2026 – Present</span></span>
-        <span class="wrole" style="font-size:.95rem;margin-top:.2rem;margin-bottom:.2rem;">Associate Director of Design <span style="color:var(--muted);font-size:.72rem;font-family:var(--ff-m);letter-spacing:.05em;font-style:normal;"> · Sep 2024 – Mar 2026</span></span>
-        <span class="wrole" style="font-size:.95rem;margin-bottom:.9rem;">Senior Design Manager <span style="color:var(--muted);font-size:.72rem;font-family:var(--ff-m);letter-spacing:.05em;font-style:normal;"> · Dec 2021 – Jun 2024</span></span>
-        <ul class="wbullets">
-          <li>Directed a team of 4 designers across high-impact product initiatives that contributed to 80% year-on-year revenue growth.</li>
-          <li>Handpicked to lead design for Junglee's Core Innovation Pod, a select group of top-performing employees formed to drive new product innovation across emerging gaming products.</li>
-          <li>Led UX strategy, design vision, and quality standards across Junglee Rummy, Tongits, Junglee Ludo, Junglee Callbreak, Howzat, and Junglee Poker.</li>
-          <li>Designed and launched multiple 0→1 gaming products across India, the Middle East, and the Philippines, including Tongits and Junglee Ludo.</li>
-          <li>Defined the UX philosophy for Tongits for the Filipino market, helping average user screen time reach 1 hour within a quarter of launch.</li>
-          <li>Led end-to-end design for Junglee Rummy, serving 60M+ users across gameplay, Add Cash, transactions, KYC, and onboarding journeys.</li>
-          <li>Designed and launched Junglee Poker across mobile and desktop platforms from scratch.</li>
-          <li>Scaled Junglee Rummy's design system and introduced structured critique processes to improve design consistency, delivery efficiency, and team quality.</li>
-        </ul>
-        <div class="wtags"><span class="wtag">60M+ Users</span><span class="wtag">0→1 Products</span><span class="wtag">Design System</span><span class="wtag">Poker UX</span><span class="wtag">Add Cash</span><span class="wtag">KYC</span><span class="wtag">India · ME · PH</span></div>
+    <a href="case-studies/tongits.html" class="cs-card">
+      <div class="cs-img cs-img-photo">
+        <span class="cs-img-tag">B2C · Gaming · PH</span>
+        <img src="case-studies/tongits-hero.png" alt="TongitsHub app redesign thumbnail">
       </div>
-    </div>
-
-    <div class="witem">
-      <div class="wl"><span class="wco">CleverTap</span><span class="wper">Mar 2020 – Dec 2021</span><span class="wtag">B2B · SaaS</span></div>
-      <div class="wr">
-        <span class="wrole">Senior Design Manager</span>
-        <ul class="wbullets">
-          <li>Led end-to-end design for CleverTap for Startups, a self-serve SaaS onboarding platform for SMBs.</li>
-          <li>Designed the product from scratch across UX strategy, information architecture, user journeys, prototyping, usability testing, and delivery.</li>
-          <li>Helped onboard 50+ businesses within 6 months of launch.</li>
-          <li>Improved usability of enterprise customer segmentation and cohort analysis workflows within CleverTap's core platform.</li>
-        </ul>
-        <div class="wtags"><span class="wtag">50+ Businesses</span><span class="wtag">Self-serve Onboarding</span><span class="wtag">Segmentation UX</span><span class="wtag">Cohort Analysis</span></div>
+      <div class="cs-body">
+        <span class="cs-co">TongitsHub</span>
+        <h3 class="cs-title">Redesigning TongitsHub's App Experience</h3>
+        <p class="cs-sub">How a landscape-first redesign and richer visuals closed the experience-fit gap — driving average session time to 48 minutes post-launch.</p>
+        <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
-    </div>
+    </a>
 
-    <div class="witem">
-      <div class="wl"><span class="wco">Richpanel</span><span class="wper">Jan 2018 – Mar 2020</span><span class="wtag">B2B · CRM</span></div>
-      <div class="wr">
-        <span class="wrole">VP Product Design</span>
-        <ul class="wbullets">
-          <li>Established the company's UX vision, product strategy, and design process from the ground up.</li>
-          <li>Designed and launched an AI-assisted customer support platform for eCommerce businesses.</li>
-          <li>Defined product workflows, experience principles, and design standards in a 0→1 startup environment.</li>
-          <li>Helped onboard 10+ clients within the first month of launch.</li>
-          <li>Enabled clients to reduce manually resolved support tickets by 80%+ within 3 months through automation-led UX.</li>
-        </ul>
-        <div class="wtags"><span class="wtag">80% Ticket Reduction</span><span class="wtag">AI Support Platform</span><span class="wtag">Zero-to-One</span></div>
+    <a href="#contact" class="cs-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
+      <div class="cs-img cs-img-2">
+        <span class="cs-img-tag">0→1 · Filipino Market</span>
+        <div class="cs-img-glyph">◆</div>
       </div>
-    </div>
-
-    <div class="witem">
-      <div class="wl"><span class="wco">Games24x7</span><span class="wper">May 2014 – Jan 2018</span><span class="wtag">B2C · Gaming</span></div>
-      <div class="wr">
-        <span class="wrole">Lead Product Designer — RummyCircle</span>
-        <ul class="wbullets">
-          <li>Joined as the first product designer for RummyCircle and led product design across gameplay, transactions, Add Cash, KYC, and security flows.</li>
-          <li>Designed and launched India's first online rummy Android app from concept to live product.</li>
-          <li>Built and scaled the design team from 0→4 designers while establishing style guides, design standards, and processes.</li>
-          <li>Revamped Add Cash journeys to improve one of the platform's most business-critical funnels.</li>
-        </ul>
-        <div class="wtags"><span class="wtag">First Designer</span><span class="wtag">Android App</span><span class="wtag">0→4 Team</span><span class="wtag">Style Guide</span><span class="wtag">Add Cash Revamp</span></div>
+      <div class="cs-body">
+        <span class="cs-co">Tongits · Junglee Games</span>
+        <h3 class="cs-title">Launching Tongits from Zero to 1 Hour Screen Time</h3>
+        <p class="cs-sub">Defining the UX philosophy for a 0→1 gaming product built for the Philippines — reaching 1 hour average screen time within a quarter of launch.</p>
+        <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
-    </div>
+    </a>
 
-    <div class="witem">
-      <div class="wl"><span class="wco">Earlier Roles</span><span class="wper">2007 – 2014</span><span class="wtag">Multi-domain</span></div>
-      <div class="wr">
-        <span class="wrole">Enterprise · eCommerce · Agency</span>
-        <ul class="wbullets">
-          <li>Lead Designer at Iksula Services — led UX and design delivery for eCommerce and fashion clients including Edaba, Gitanjali Jewellery, StatusCo, and Globus.</li>
-          <li>Senior Application Designer at Bank of America — designed mobile applications and enterprise web tools for banking workflows and internal operational systems.</li>
-          <li>Web Designer at Exa India — designed websites for major Australian brands, gaining early international client and product exposure.</li>
-        </ul>
-        <div class="wtags"><span class="wtag">Bank of America</span><span class="wtag">Iksula</span><span class="wtag">Exa India</span><span class="wtag">eCommerce</span><span class="wtag">Enterprise UI</span></div>
+    <a href="#contact" class="cs-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
+      <div class="cs-img cs-img-3">
+        <span class="cs-img-tag">B2B · SaaS</span>
+        <div class="cs-img-glyph">◇</div>
       </div>
-    </div>
+      <div class="cs-body">
+        <span class="cs-co">Richpanel</span>
+        <h3 class="cs-title">An AI Support Platform That Cut Tickets by 80%</h3>
+        <p class="cs-sub">Building the UX vision and product from the ground up — an AI-assisted customer support platform that reduced manually resolved tickets by 80%+.</p>
+        <span class="cs-link">Read Case Study <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
 
+  </div>
+</section>
+
+<!-- ═══ RESUME ═══ -->
+<section id="resume">
+  <div class="resume-inner rv">
+    <div class="resume-text">
+      <div class="eyebrow"><span>Full Background</span></div>
+      <h2 class="resume-h">Want the <span>complete</span> picture?</h2>
+      <p class="resume-sub">18+ years across Real Money Gaming, SaaS, and eCommerce — the full history of roles, achievements, and skills, all in one page.</p>
+    </div>
+    <a href="Kapil-Singh-Resume.pdf" download class="btn btn-fill resume-btn">Download Résumé (PDF)
+      <svg class="arr" viewBox="0 0 14 14" fill="none"><path d="M7 1v9M3.5 6.5L7 10l3.5-3.5M1.5 12.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </section>
 
@@ -463,7 +458,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:
 <footer>
   <div class="foot-logo">Kapil Singh<span>.</span></div>
   <div class="foot-links">
-    <a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#articles">Articles</a><a href="#contact">Contact</a>
+    <a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#resume">Résumé</a><a href="#articles">Articles</a><a href="#contact">Contact</a>
   </div>
   <div class="foot-copy">© 2026 · New Delhi, India</div>
 </footer>

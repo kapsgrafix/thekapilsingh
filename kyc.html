@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<title>Redesigning Junglee Rummy's KYC Journey — Case Study | Kapil Singh</title>
+<meta name="description" content="A product design case study by Kapil Singh: how a smarter manual KYC upload flow for Junglee Rummy brought verification success close to perfection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f2;--white:#fff;--s1:#f0ede8;--s2:#e8e4dd;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
+  --ink:#111110;--muted:#9a9690;--muted2:#6b6760;
+  --accent:#c8864a;--accent2:#a86535;--accent-bg:rgba(200,134,74,0.08);
+  --ff-d:'Poppins',sans-serif;--ff-b:'Poppins',sans-serif;--ff-m:'Geist Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--ff-b);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .08s;}
+#cr{width:30px;height:30px;border:1.5px solid rgba(200,134,74,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+body:has(a:hover) #cr{width:46px;height:46px;border-color:var(--accent);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:rgba(247,245,242,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.nav-back:hover{color:var(--accent);}
+
+.cs-page{padding-top:58px;}
+
+/* Hero */
+.cs-hero{padding:4rem 3.5rem 2.5rem;max-width:1100px;margin:0 auto;}
+.cs-breadcrumb{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;display:flex;gap:.6rem;align-items:center;}
+.cs-breadcrumb a{color:var(--accent);}
+.cs-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.tag{display:inline-block;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);background:rgba(200,134,74,.1);padding:4px 10px;border-radius:3px;}
+.cs-h1{font-family:var(--ff-d);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:600;line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin-bottom:1.25rem;}
+.cs-h1 span{color:var(--accent);}
+.cs-intro{font-size:1.15rem;line-height:1.6;color:var(--muted2);max-width:720px;font-weight:400;}
+
+/* Hero image */
+.cs-hero-img{max-width:1100px;margin:2.5rem auto 0;padding:0 3.5rem;}
+.cs-hero-img img{width:100%;border-radius:8px;border:1px solid var(--border);}
+/* Meta bar */
+.cs-meta{max-width:1100px;margin:2.5rem auto;padding:0 3.5rem;}
+.cs-meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.cs-meta-cell{background:var(--white);padding:1.5rem;}
+.cs-meta-k{font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;}
+.cs-meta-v{font-size:.9rem;color:var(--ink);font-weight:500;line-height:1.4;}
+
+/* Body */
+.cs-body{max-width:760px;margin:0 auto;padding:2rem 3.5rem;}
+.cs-body:last-of-type{padding-bottom:3rem;}
+.cs-body h2{font-family:var(--ff-d);font-size:1.7rem;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin:2.5rem 0 1rem;line-height:1.2;}
+.cs-body h2:first-child,.cs-body h3:first-child{margin-top:0;}
+.cs-body p:last-child,.cs-body ul:last-child,.cs-body .quote-block:last-child,.cs-body .outcome:last-child{margin-bottom:0;}
+.cs-body > .quote-block:only-child{margin:0;}
+.cs-body h3{font-family:var(--ff-d);font-size:1.15rem;font-weight:600;color:var(--ink);margin:2rem 0 .75rem;}
+.cs-body p{font-size:1rem;line-height:1.8;color:var(--muted2);margin-bottom:1.25rem;}
+.cs-body p strong{color:var(--ink);font-weight:600;}
+.cs-body ul{list-style:none;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:.85rem;}
+.cs-body ul li{font-size:1rem;line-height:1.7;color:var(--muted2);padding-left:1.3rem;position:relative;}
+.cs-body ul li::before{content:'–';position:absolute;left:0;color:var(--accent);font-weight:600;}
+.cs-body ul li strong{color:var(--ink);font-weight:600;}
+
+.callout{background:var(--white);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:1.5rem 1.75rem;margin:2rem 0;}
+.callout-label{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:block;}
+.callout p{font-size:.92rem;margin-bottom:.5rem;color:var(--muted2);}
+.callout p:last-child{margin-bottom:0;}
+.callout p strong{color:var(--ink);}
+
+.quote-block{font-family:var(--ff-d);font-size:1.25rem;font-weight:500;font-style:italic;line-height:1.5;color:var(--ink);border-left:3px solid var(--accent);padding-left:1.5rem;margin:2.5rem 0;}
+
+.cs-figure{margin:2.5rem 0;}
+.cs-figure img{width:100%;border-radius:8px;border:1px solid var(--border);}
+.cs-figure figcaption{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;color:var(--muted);margin-top:.85rem;text-align:center;}
+
+/* full width figure — matches banner width */
+.cs-figure-wide{max-width:1100px;margin:2rem auto;padding:0 3.5rem;}
+.cs-figure-wide img{width:100%;border-radius:8px;border:1px solid var(--border);}
+.cs-figure-wide figcaption{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;color:var(--muted);margin-top:.85rem;text-align:center;}
+
+/* narrow figure — smaller, centered (for the framework diagram) */
+.cs-figure-narrow{max-width:760px;margin:2rem auto;padding:0 3.5rem;}
+.cs-figure-narrow img{width:100%;border-radius:8px;border:1px solid var(--border);}
+.cs-figure-narrow figcaption{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;color:var(--muted);margin-top:.85rem;text-align:center;}
+
+.insight-list{display:flex;flex-direction:column;gap:1.25rem;margin:1.5rem 0;}
+.insight{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.5rem;}
+.insight-q{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;font-style:italic;}
+.insight-a{font-size:.92rem;line-height:1.6;color:var(--muted2);}
+
+/* Outcome highlight */
+.outcome{background:var(--ink);border-radius:10px;padding:3rem;margin:3rem 0;text-align:center;}
+.outcome-n{font-family:var(--ff-d);font-size:clamp(3rem,7vw,5rem);font-weight:600;color:var(--accent);line-height:1;letter-spacing:-.02em;}
+.outcome-l{font-size:1rem;line-height:1.6;color:rgba(247,245,242,.7);max-width:440px;margin:1.25rem auto 0;}
+
+.principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;}
+.principle{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.5rem;}
+.principle-t{font-family:var(--ff-d);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;}
+.principle-d{font-size:.88rem;line-height:1.6;color:var(--muted2);}
+
+/* Next CTA */
+.cs-next{background:var(--white);border-top:1px solid var(--border);padding:4rem 3.5rem;text-align:center;}
+.cs-next h3{font-family:var(--ff-d);font-size:1.6rem;font-weight:600;color:var(--ink);margin-bottom:1.5rem;letter-spacing:-.01em;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-m);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 1.8rem;border:1.5px solid;cursor:none;transition:all .22s;border-radius:2px;}
+.btn-fill{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.btn-fill:hover{background:var(--accent);border-color:var(--accent);}
+svg.arr{width:12px;height:12px;transition:transform .2s;}
+a:hover svg.arr{transform:translateX(-3px);}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:1.75rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:var(--ff-d);font-size:.95rem;font-weight:600;color:rgba(247,245,242,.3);}
+.foot-logo span{color:var(--accent);}
+.foot-copy{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,245,242,.2);}
+
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;opacity:1;transform:none;}}
+
+@media(max-width:768px){
+  body{cursor:auto;}
+  #cd,#cr{display:none;}
+  nav{padding:1rem 1.25rem;}
+  .cs-hero,.cs-body,.cs-hero-img,.cs-meta,.cs-figure-wide,.cs-figure-narrow{padding-left:1.25rem;padding-right:1.25rem;}
+  .cs-meta-grid{grid-template-columns:1fr 1fr;}
+  .principle-grid{grid-template-columns:1fr;}
+  .outcome{padding:2rem 1.5rem;}
+  .cs-next{padding:3rem 1.25rem;}
+  footer{padding:1.5rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div><div id="cr"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Kapil Singh<span>.</span></a>
+  <a href="index.html#work" class="nav-back"><svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M6 2L2 6l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to Work</a>
+</nav>
+
+<div class="cs-page">
+
+  <!-- HERO -->
+  <div class="cs-hero">
+    <div class="cs-breadcrumb"><a href="index.html">Home</a> / <a href="index.html#work">Work</a> / <span>Junglee Rummy KYC</span></div>
+    <div class="cs-tags">
+      <span class="tag">Product Design</span>
+      <span class="tag">B2C · Real Money Gaming</span>
+      <span class="tag">Compliance UX</span>
+      <span class="tag">Conversion</span>
+    </div>
+    <h1 class="cs-h1">Redesigning Junglee Rummy's <span>KYC Journey</span></h1>
+    <p class="cs-intro">How a smarter manual upload flow helped bring KYC verification close to perfection.</p>
+  </div>
+
+  <div class="cs-hero-img rv">
+    <img src="kyc-hero.png" alt="Junglee Rummy KYC redesign — hero">
+  </div>
+
+  <!-- META -->
+  <div class="cs-meta rv">
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><span class="cs-meta-k">My Role</span><span class="cs-meta-v">Design Lead</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Team</span><span class="cs-meta-v">1 Junior Designer · 2 PMs · 1 Developer</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Objective</span><span class="cs-meta-v">Improve success rate of manual KYC uploads</span></div>
+      <div class="cs-meta-cell"><span class="cs-meta-k">Domain</span><span class="cs-meta-v">Real Money Gaming · Compliance</span></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <article class="cs-body">
+    <p>For a real-money gaming product like Junglee Rummy, KYC is a critical business journey.</p>
+    <p>As per compliance, users must be KYC verified before they can play cash games. So KYC is not just an identity check — it is the gateway between user intent and revenue.</p>
+    <p>Many users in our target audience were not very familiar with automated KYC platforms like DigiLocker, so they often moved toward the more familiar manual document upload route.</p>
+
+    <h2>The Problem</h2>
+    <p>More than <strong>60% of manual KYC uploads were going into review</strong> instead of getting auto-approved.</p>
+    <p>This meant users had to wait at the exact moment they were ready to start playing. For the business, every delayed or failed KYC directly impacted add-cash conversion and revenue.</p>
+
+    <h2>How We Conducted the Investigation</h2>
+    <h3>Discover</h3>
+    <p>As a team, we reviewed the uploads that failed automated verification and moved into manual review.</p>
+    <p>The pattern was clear: <strong>most failures were caused by poor or incorrect uploads.</strong> Many images were blurry, cropped, out of focus, or had unreadable text. In some cases, the full ID was not visible. We also found users uploading random images or selfies instead of their ID proof.</p>
+
+    <blockquote class="quote-block">The flow was letting users submit bad uploads before guiding them on what a valid document image should look like.</blockquote>
+
+    <h2>The Call We Made</h2>
+    <h3>Define</h3>
+    <p>We made the strategic call to focus on two things at the same time:</p>
+
+    <div class="principle-grid">
+      <div class="principle">
+        <div class="principle-t">1. Educate before upload</div>
+        <div class="principle-d">Guide users at every step on what a good document image looks like — clear, readable, properly framed, and complete. Help them upload the right image the first time.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-t">2. Prevent errors before submission</div>
+        <div class="principle-d">Instead of showing a polished error message after a failed upload, stop the failure from happening in the first place. Prevention, not recovery.</div>
+      </div>
+    </div>
+
+    <p>The design direction became simple: <strong>help users understand what to upload, verify the image before submission, and reduce the chances of failure upfront.</strong></p>
+
+    <h2>Leading the Design &amp; Build</h2>
+    <h3>Develop · 1. Educate users during upload</h3>
+    <p>The first step was to guide users before they clicked the image. We added clear instructions at the upload stage, telling users what a good ID photo should look like.</p>
+  </article>
+
+  <div class="cs-figure-wide rv">
+    <img src="kyc-educate.png" alt="Upload instructions guiding users on a valid ID photo">
+  </div>
+
+  <article class="cs-body">
+    <ul>
+      <li>The text should be sharp and readable.</li>
+      <li>The ID should be fully visible.</li>
+      <li>The document should sit properly within the frame.</li>
+      <li>The image should not be blurry, cropped, or out of focus.</li>
+    </ul>
+    <p>We also added a designated capture area on the camera screen, giving users a visual guardrail to align their ID before taking the photo. This made the upload step feel more guided and reduced the chances of users submitting unusable images.</p>
+
+    <h3>Develop · 2. Prevent errors before submission</h3>
+    <p>The second step was to change <em>when</em> verification happened. Earlier, users were uploading and submitting documents without realizing something was wrong. These uploads would then move into manual review, which took more time and, in many cases, still ended in rejection after almost an hour.</p>
+    <p>Now, users could catch mistakes <strong>before</strong> final submission instead of waiting for the system to reject the upload later.</p>
+  </article>
+
+  <div class="cs-figure-wide rv">
+    <img src="kyc-prevent.png" alt="Verifying the image before submission to prevent failures">
+  </div>
+
+  <article class="cs-body">
+    <p>The shift was simple but important: we moved from showing errors after failure to preventing failure before submission.</p>
+  </article>
+
+  <div class="cs-figure-narrow rv">
+    <img src="kyc-verify.png" alt="Redesigned manual KYC verification flow">
+  </div>
+
+  <article class="cs-body">
+    <h2>The Outcome</h2>
+    <p>The redesigned KYC flow showed strong impact within the first <strong>60 days</strong>. The biggest win was simple: more users were able to move smoothly into the cash-game journey.</p>
+  </article>
+
+  <div class="cs-figure-narrow rv">
+    <img src="kyc-outcome.png" alt="Outcome of the KYC redesign within the first 60 days">
+  </div>
+
+  <article class="cs-body">
+    <h2>What This Taught Me as a Design Leader</h2>
+    <ul>
+      <li><strong>Small flow changes can create big business impact.</strong> The biggest improvement did not come from adding a new feature. It came from changing the sequence of the flow and solving the right problem at the right moment.</li>
+      <li><strong>Prevention is better than recovery.</strong> A good error message helps users recover. But a better experience stops the error from happening in the first place. Moving verification before submission made the flow more forgiving and more effective.</li>
+      <li><strong>Education is part of UX.</strong> Many users were not failing because they lacked intent — they were failing because the product did not guide them clearly enough. Simple instructions, visual examples, and capture guardrails made the task easier.</li>
+      <li><strong>Compliance journeys need product thinking.</strong> KYC may look like a backend or compliance requirement, but for users it is a key product moment. If it slows them down, it directly affects trust, conversion, and revenue.</li>
+      <li><strong>Design leadership is about finding leverage.</strong> The role was not just to redesign screens. It was to identify the highest-impact friction, align the team around it, and turn a mandatory flow into a smoother business-critical journey.</li>
+    </ul>
+  </article>
+
+  <!-- NEXT CTA -->
+  <div class="cs-next">
+    <h3>Interested in working together?</h3>
+    <a href="index.html#contact" class="btn btn-fill">Get in Touch <svg class="arr" viewBox="0 0 12 12" fill="none" style="transform:none;"><path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-logo">Kapil Singh<span>.</span></div>
+  <div class="foot-copy">© 2026 · New Delhi, India</div>
+</footer>
+
+<script>
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.transform=`translate(${mx-3.5}px,${my-3.5}px)`;});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.transform=`translate(${rx-15}px,${ry-15}px)`;requestAnimationFrame(tick);})();
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -291,7 +291,12 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(3px,0);}
 .contact-eyebrow{display:flex;align-items:center;gap:.65rem;margin-bottom:1.25rem;}
 .contact-eyebrow::before{content:'';display:block;width:22px;height:3px;background:var(--lime);border-radius:2px;}
 .contact-eyebrow span{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);}
-.contact-sub{font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,.55);max-width:380px;font-weight:500;}
+.contact-sub{font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,.55);max-width:400px;font-weight:500;}
+.contact-book{margin-top:2.25rem;}
+.btn-book{background:var(--lime);color:var(--ink);border:1.5px solid var(--lime);}
+.btn-book:hover{background:var(--lime2);border-color:var(--lime2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(205,240,63,.25);}
+.book-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem;}
+.book-tags span{font-family:var(--ff-m);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.14);padding:5px 10px;border-radius:20px;}
 .loc-strip{display:flex;align-items:center;gap:.7rem;margin-top:2rem;}
 .loc-dot{width:7px;height:7px;background:var(--lime);border-radius:50%;animation:blink 2.8s ease-in-out infinite;}
 .loc-txt{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);}
@@ -306,6 +311,12 @@ a:hover svg.arr,button:hover svg.arr{transform:translate(3px,0);}
 .cl-lbl{font-family:var(--ff-m);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:.15rem;}
 .cl-val{font-family:var(--ff-d);font-size:.95rem;font-weight:600;letter-spacing:-.01em;color:rgba(255,255,255,.85);}
 .cl-arr{color:rgba(255,255,255,.25);font-size:.9rem;transition:color .2s,transform .2s;}
+/* Featured Calendly row */
+.clink-feat{border-top:none;background:rgba(205,240,63,.07);border:1px solid rgba(205,240,63,.25);border-radius:12px;padding:1.1rem 1.1rem;margin-bottom:.4rem;}
+.clink-feat:hover{padding-left:1.6rem;background:rgba(205,240,63,.12);}
+.clink-feat + .clink{border-top:none;}
+.clink-feat .cl-ico{border-color:rgba(205,240,63,.35);}
+.clink-feat .cl-val{color:#fff;}
 
 /* ── FOOTER ──────────────────────────────────────── */
 footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.09);padding:1.75rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
@@ -602,7 +613,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.09);padding:
     <div class="rv-left">
       <div class="contact-eyebrow"><span>Get in Touch</span></div>
       <h2 class="contact-h">Let's <em>talk</em> design.</h2>
-      <p class="contact-sub">Whether you're building a product team, looking for a design leader, want to collaborate, or just want to talk craft — I'd love to hear from you.</p>
+      <p class="contact-sub">Design consultation, help with your job search, or mentorship — grab a time that works and let's chat. Bring the messy version; that's usually the most interesting one.</p>
+      <div class="contact-book">
+        <a href="https://calendly.com/kapsgrafix" target="_blank" rel="noopener" class="btn btn-book">Book a Call <svg class="arr" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="book-tags"><span>Design Consultation</span><span>Job-Search Help</span><span>Mentorship</span></div>
+      </div>
       <div class="loc-strip"><div class="loc-dot"></div><span class="loc-txt">New Delhi, India · Open to remote & hybrid</span></div>
     </div>
     <div class="clink-list rv-right stagger">
